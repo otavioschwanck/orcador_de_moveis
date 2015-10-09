@@ -43,7 +43,7 @@ class BudgetsController < ApplicationController
   def update
     respond_to do |format|
       if @budget.update(budget_params)
-        format.html { redirect_to @budget, notice: 'Orçamento atualizado com sucesso..' }
+        format.html { redirect_to [@client, @budget], notice: 'Orçamento atualizado com sucesso..' }
         format.json { render :show, status: :ok, location: @budget }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class BudgetsController < ApplicationController
   def destroy
     @budget.destroy
     respond_to do |format|
-      format.html { redirect_to budgets_url, notice: 'Orçamento deletado com sucesso.' }
+      format.html { redirect_to client_budgets_url(@client), notice: 'Orçamento deletado com sucesso.' }
       format.json { head :no_content }
     end
   end

@@ -54,7 +54,7 @@ class MobilesController < ApplicationController
   def destroy
     @mobile.destroy
     respond_to do |format|
-      format.html { redirect_to mobiles_url, notice: 'Mobile was successfully destroyed.' }
+      format.html { redirect_to client_budgets_url(@client), notice: 'Mobile was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
