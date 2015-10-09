@@ -2,12 +2,14 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %>: <%= @mobile.name %></h1>
   <h4><%= @budget.description %></h4>
+  <p><%= @mobile.description %> - Material vezes <%= @mobile.multiplier %></p>
   <p>De: <%= link_to @client.name, @client %></p>
 </div>
 
 <dl class="dl-horizontal">
 </dl>
 
+<%= link_to "Adicionar chapa", new_client_budget_mobile_plate_path(@client, @budget, @mobile), class: "btn btn-default" %>
 <%= link_to t('.back', :default => t("helpers.links.back")),
               client_budget_path(@client, @budget), :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -17,3 +19,28 @@
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
+
+<% if @mobile.plates.count != 0 %>
+<h3>Chapas</h3>
+	<table class = "table table-sm">
+		<tr>
+			<td>Largura</td>
+			<td>Altura</td>
+			<td>Valor da chapa</td>
+			<td>Pedaços iguais a este</td>
+			<td>Valor total</td>
+			<td colspan="2">Ações</td>
+		</tr>
+		<% @mobile.plates.each do |plate| %>
+		<tr>
+			<td><%= plate.width %></td>
+			<td><%= plate.height %></td>
+			<td><%= number_to_currency plate.plate_value %></td>
+			<td><%= plate.qtd %></td>
+			<td><%= number_to_currency plate.value %></td>
+			<td><%= link_to "editar", edit_client_budget_mobile_plate_path(@client, @budget, @mobile, plate), class: "btn btn-default btn-sm" %></td>
+			<td><%= link_to "deletar", client_budget_mobile_plate_path(@client, @budget, @mobile, plate), method: :delete, class: "btn btn-danger btn-sm", data: {confirm: "Você tem certeza disso?"} %></td>
+		</tr>
+		<% end %>
+	</table>
+<% end %>

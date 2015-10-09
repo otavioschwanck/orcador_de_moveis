@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  width: MyString
+  height: MyString
+  plate_value: 1.5
+  qtd: 1
+  mobile_id: 
+
+two:
+  width: MyString
+  height: MyString
+  plate_value: 1.5
+  qtd: 1
+  mobile_id: 

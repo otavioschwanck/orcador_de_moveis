@@ -1,0 +1,44 @@
+<%- model_class = Plate -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:width) %></th>
+      <th><%= model_class.human_attribute_name(:height) %></th>
+      <th><%= model_class.human_attribute_name(:plate_value) %></th>
+      <th><%= model_class.human_attribute_name(:qtd) %></th>
+      <th><%= model_class.human_attribute_name(:mobile_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @plates.each do |plate| %>
+      <tr>
+        <td><%= link_to plate.id, plate_path(plate) %></td>
+        <td><%= plate.width %></td>
+        <td><%= plate.height %></td>
+        <td><%= plate.plate_value %></td>
+        <td><%= plate.qtd %></td>
+        <td><%= plate.mobile_id %></td>
+        <td><%=l plate.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_plate_path(plate), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      plate_path(plate),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_plate_path,
+            :class => 'btn btn-primary' %>

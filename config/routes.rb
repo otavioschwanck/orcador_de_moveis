@@ -2,9 +2,12 @@ Rails.application.routes.draw do
   
   
   
+  resources :plates
   resources :clients do 
     resources :budgets do 
-      resources :mobiles, except: [:index]
+      resources :mobiles, except: [:index] do 
+        resources :plates, except: [:index, :show]
+      end
     end
   end
   root 'home#index'

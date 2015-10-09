@@ -3,6 +3,8 @@
   <%= error_span(@budget[:name]) %>	
   <%= f.input :description %>
   <%= error_span(@budget[:description]) %>
+  <%= f.input :multiplier %>
+  <%= error_span(@budget[:multiplier]) %>
   <%= f.button :submit, :class => 'btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 client_budget_path(@client, @budget), :class => 'btn btn-default' %>

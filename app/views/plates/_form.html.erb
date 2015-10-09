@@ -1,0 +1,14 @@
+<%= simple_form_for [@client, @budget, @mobile, @plate], :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :width %>
+  <%= error_span(@plate[:width]) %>
+  <%= f.input :height %>
+  <%= error_span(@plate[:height]) %>
+  <%= f.input :plate_value, input_html: {value: session[:plate_value].nil? ? 130 : session[:plate_value]} %>
+  <%= error_span(@plate[:plate_value]) %>
+  <%= f.input :qtd %>
+  <%= error_span(@plate[:qtd]) %>
+
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                client_budget_mobile_path(@client, @budget, @mobile), :class => 'btn btn-default' %>
+<% end %>

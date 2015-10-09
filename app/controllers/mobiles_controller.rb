@@ -2,7 +2,7 @@ class MobilesController < ApplicationController
   before_action :set_client
   before_action :set_budget
   before_action :set_mobile, only: [:show, :edit, :update, :destroy]
-
+    before_action :authenticate_user!
   # GET /mobiles
 
   # GET /mobiles/1
@@ -74,6 +74,6 @@ class MobilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mobile_params
-      params.require(:mobile).permit(:name, :description, :budget_id)
+      params.require(:mobile).permit(:multiplier, :name, :description, :budget_id)
     end
 end

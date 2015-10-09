@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151009023543) do
+ActiveRecord::Schema.define(version: 20151009154028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,9 +44,22 @@ ActiveRecord::Schema.define(version: 20151009023543) do
     t.integer  "budget_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.float    "multiplier"
   end
 
   add_index "mobiles", ["budget_id"], name: "index_mobiles_on_budget_id", using: :btree
+
+  create_table "plates", force: :cascade do |t|
+    t.float    "width"
+    t.float    "height"
+    t.float    "plate_value"
+    t.integer  "qtd"
+    t.integer  "mobile_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "plates", ["mobile_id"], name: "index_plates_on_mobile_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -67,4 +80,5 @@ ActiveRecord::Schema.define(version: 20151009023543) do
   add_foreign_key "budgets", "clients"
   add_foreign_key "clients", "users"
   add_foreign_key "mobiles", "budgets"
+  add_foreign_key "plates", "mobiles"
 end

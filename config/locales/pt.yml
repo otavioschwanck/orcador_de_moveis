@@ -42,6 +42,11 @@ pt:
       item: Item
       budget_item_registred: Item registrado
     attributes:
+      plate:
+        width: Largura
+        height: Altura
+        plate_value: Preço da chapa
+        qtd: Quantidade
       mobile: 
         description: Descrição
         name: Nome
