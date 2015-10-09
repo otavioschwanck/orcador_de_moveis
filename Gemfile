@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+gem 'zeroclipboard-rails'
 # Gems externas
 gem 'simple_form'
 gem 'kaminari'

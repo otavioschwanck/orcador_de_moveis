@@ -8,6 +8,10 @@ class BudgetsController < ApplicationController
     @budgets = @client.budgets.all.order(created_at: :desc).page(params[:page]).per(20)
   end
 
+  def copiable
+    @budget = @client.budgets.find(params[:budget_id])
+  end
+
   # GET /budgets/1
   # GET /budgets/1.json
   def show

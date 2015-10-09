@@ -1,0 +1,16 @@
+<%= simple_form_for [@client, @budget, @mobile, @by_meter], :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :width %>
+  <%= error_span(@by_meter[:width]) %>
+  <%= f.input :height %>
+  <%= error_span(@by_meter[:height]) %>
+  <%= f.input :meter_price, input_html: {value: session[:meter_price].nil? ? 800 : session[:meter_price]} %>
+  <%= error_span(@by_meter[:meter_price]) %>
+  <%= f.input :qtd %>
+  <%= error_span(@by_meter[:qtd]) %>
+  <%= error_span(@by_meter[:qtd]) %>
+  <%= f.input :multiplicable, as: :boolean %>
+
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                client_budget_mobile_path(@client, @budget, @mobile), :class => 'btn btn-default' %>
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151009154028) do
+ActiveRecord::Schema.define(version: 20151009203820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,19 @@ ActiveRecord::Schema.define(version: 20151009154028) do
   end
 
   add_index "budgets", ["client_id"], name: "index_budgets_on_client_id", using: :btree
+
+  create_table "by_meters", force: :cascade do |t|
+    t.float    "width"
+    t.float    "height"
+    t.float    "meter_price"
+    t.integer  "qtd"
+    t.boolean  "multiplicable"
+    t.integer  "mobile_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "by_meters", ["mobile_id"], name: "index_by_meters_on_mobile_id", using: :btree
 
   create_table "clients", force: :cascade do |t|
     t.string   "name"
@@ -61,6 +74,18 @@ ActiveRecord::Schema.define(version: 20151009154028) do
 
   add_index "plates", ["mobile_id"], name: "index_plates_on_mobile_id", using: :btree
 
+  create_table "unregistred_items", force: :cascade do |t|
+    t.string   "description"
+    t.float    "value"
+    t.float    "qtd"
+    t.integer  "mobile_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.boolean  "multiplicable"
+  end
+
+  add_index "unregistred_items", ["mobile_id"], name: "index_unregistred_items_on_mobile_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -78,7 +103,9 @@ ActiveRecord::Schema.define(version: 20151009154028) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   add_foreign_key "budgets", "clients"
+  add_foreign_key "by_meters", "mobiles"
   add_foreign_key "clients", "users"
   add_foreign_key "mobiles", "budgets"
   add_foreign_key "plates", "mobiles"
+  add_foreign_key "unregistred_items", "mobiles"
 end

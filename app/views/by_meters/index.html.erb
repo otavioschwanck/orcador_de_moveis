@@ -1,0 +1,44 @@
+<%- model_class = ByMeter -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:width) %></th>
+      <th><%= model_class.human_attribute_name(:height) %></th>
+      <th><%= model_class.human_attribute_name(:meter_price) %></th>
+      <th><%= model_class.human_attribute_name(:qtd) %></th>
+      <th><%= model_class.human_attribute_name(:mobile_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @by_meters.each do |by_meter| %>
+      <tr>
+        <td><%= link_to by_meter.id, by_meter_path(by_meter) %></td>
+        <td><%= by_meter.width %></td>
+        <td><%= by_meter.height %></td>
+        <td><%= by_meter.meter_price %></td>
+        <td><%= by_meter.qtd %></td>
+        <td><%= by_meter.mobile_id %></td>
+        <td><%=l by_meter.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_by_meter_path(by_meter), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      by_meter_path(by_meter),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_by_meter_path,
+            :class => 'btn btn-primary' %>

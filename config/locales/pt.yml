@@ -34,6 +34,7 @@ pt:
 
   activerecord:
     models:
+      by_meter: Por metro quadrado
       mobile: Móvel
       user: Usuário
       client: Cliente
@@ -41,7 +42,19 @@ pt:
       plate: Chapa
       item: Item
       budget_item_registred: Item registrado
+      unregistred_item: Item não registrado
     attributes:
+      by_meter:
+        width: Largura
+        height: Altura
+        meter_price: Preço do metro
+        qtd: Quantidade
+        multiplicable: Multiplicar este item pela quantidade de vezes do móvel?
+      unregistred_item:
+        description: Descrição
+        value: Valor
+        qtd: Quantidade
+        multiplicable: Multiplicar este item pela quantidade de vezes do móvel?
       plate:
         width: Largura
         height: Altura

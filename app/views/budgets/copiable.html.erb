@@ -1,0 +1,19 @@
+<table border = 1>
+	<tr style = "background-color: yellow">
+		<th>Item</th>
+		<th style = "width: 120px">Valor</th>
+	</tr>
+	<% @budget.mobiles.each do |mobile| %>
+		<tr>
+			<td><%= mobile.name %></td>
+			<td align = center><%= number_to_currency mobile.total_value * mobile.multiplier%></td>
+		</tr>
+	<% end %>
+	<tr style = "background-color: #9EFAC7">
+		<th>Total:</th>
+		<td align = "center"><%= number_to_currency @budget.total_value %></td>
+	</tr>
+</table>
+<% 5.times do %>
+<br>
+<% end %>

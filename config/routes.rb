@@ -2,11 +2,15 @@ Rails.application.routes.draw do
   
   
   
-  resources :plates
+
+  
   resources :clients do 
     resources :budgets do 
+      get "budgets/copiable"
       resources :mobiles, except: [:index] do 
         resources :plates, except: [:index, :show]
+        resources :unregistred_items, except: [:index, :show]
+        resources :by_meters, except: [:index, :show]
       end
     end
   end

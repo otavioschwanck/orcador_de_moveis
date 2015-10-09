@@ -2,7 +2,9 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %>: <%= @mobile.name %></h1>
   <h4><%= @budget.description %></h4>
-  <p><%= @mobile.description %> - Material vezes <%= @mobile.multiplier %></p>
+  <h3>Total de material: <%= number_to_currency @mobile.total_value %></h3>
+  <p>- Itens marcados para não ser multiplicados, são divididos por <%= @mobile.multiplier %>, assim, ignorando a multiplicação no orçamento total</p>
+  <p><%= @mobile.description %> - Material vezes <%= @mobile.multiplier %></p> 
   <p>De: <%= link_to @client.name, @client %></p>
 </div>
 
@@ -10,6 +12,9 @@
 </dl>
 
 <%= link_to "Adicionar chapa", new_client_budget_mobile_plate_path(@client, @budget, @mobile), class: "btn btn-default" %>
+<%= link_to "Adicionar por metro quadrado", new_client_budget_mobile_by_meter_path(@client, @budget, @mobile), class: "btn btn-default" %>
+
+<%= link_to "Adicionar item não registrado", new_client_budget_mobile_unregistred_item_path(@client, @budget, @mobile), class: "btn btn-default" %>
 <%= link_to t('.back', :default => t("helpers.links.back")),
               client_budget_path(@client, @budget), :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -40,6 +45,60 @@
 			<td><%= number_to_currency plate.value %></td>
 			<td><%= link_to "editar", edit_client_budget_mobile_plate_path(@client, @budget, @mobile, plate), class: "btn btn-default btn-sm" %></td>
 			<td><%= link_to "deletar", client_budget_mobile_plate_path(@client, @budget, @mobile, plate), method: :delete, class: "btn btn-danger btn-sm", data: {confirm: "Você tem certeza disso?"} %></td>
+		</tr>
+		<% end %>
+	</table>
+<% end %>
+
+<% if @mobile.unregistred_items.count != 0 %>
+<h3>Itens não registrados</h3>
+	<table class = "table table-sm">
+		<tr>
+			<td>Descrição</td>
+			<td>Valor do item</td>
+			<td>Quantidade</td>
+			<td>Valor total</td>
+			<td>Multiplicar pelo multiplicador do móvel</td>
+			<td colspan="2">Ações</td>
+		</tr>
+		<% @mobile.unregistred_items.each do |unregistred_item| %>
+		<tr>
+			<td><%= unregistred_item.description %></td>
+			<td><%= number_to_currency unregistred_item.value %></td>
+			<td><%= unregistred_item.qtd %></td>
+			<td><%= number_to_currency unregistred_item.total_value %></td>
+			<td><%= unregistred_item.multiplicable ? "Sim" : "Não" %></td>
+			<td><%= link_to "editar", edit_client_budget_mobile_unregistred_item_path(@client, @budget, @mobile, unregistred_item), class: "btn btn-default btn-sm" %></td>
+			<td><%= link_to "deletar", client_budget_mobile_unregistred_item_path(@client, @budget, @mobile, unregistred_item), method: :delete, class: "btn btn-danger btn-sm", data: {confirm: "Você tem certeza disso?"} %></td>
+		</tr>
+		<% end %>
+	</table>
+<% end %>
+
+
+<% if @mobile.by_meters.count != 0 %>
+<h3>Móveis por metro</h3>
+	<table class = "table table-sm">
+		<tr>
+
+			<td>Multiplicar pelo multiplicador do móvel</td>
+			<td>Largura</td>
+			<td>Altura</td>
+			<td>Valor do metro</td>
+			<td>Quantidade</td>
+			<td>Valor total</td>
+			<td colspan="2">Ações</td>
+		</tr>
+		<% @mobile.by_meters.each do |by_meter| %>
+		<tr>
+			<td><%= by_meter.multiplicable ? "Sim" : "Não" %></td>
+			<td><%= by_meter.width %></td>
+			<td><%= by_meter.height %></td>
+			<td><%= number_to_currency by_meter.meter_price %></td>
+			<td><%= by_meter.qtd %></td>
+			<td><%= number_to_currency by_meter.total_value %></td>
+			<td><%= link_to "editar", edit_client_budget_mobile_by_meter_path(@client, @budget, @mobile, by_meter), class: "btn btn-default btn-sm" %></td>
+			<td><%= link_to "deletar", client_budget_mobile_by_meter_path(@client, @budget, @mobile, by_meter), method: :delete, class: "btn btn-danger btn-sm", data: {confirm: "Você tem certeza disso?"} %></td>
 		</tr>
 		<% end %>
 	</table>

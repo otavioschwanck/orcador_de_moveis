@@ -1,11 +1,12 @@
 class PlatesController < ApplicationController
+    before_action :authenticate_user!
   before_action do 
     set_client
     set_budget
     set_mobile
   end
   before_action :set_plate, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+
 
   # GET /plates/1
   # GET /plates/1.json
