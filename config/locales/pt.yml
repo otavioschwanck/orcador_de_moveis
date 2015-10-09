@@ -50,8 +50,10 @@ pt:
       mobile: 
         description: Descrição
         name: Nome
+        multiplier: Multiplicar por
       budget:
         description: Descrição
+
       client:
         name: Nome
         phone: Telefone
