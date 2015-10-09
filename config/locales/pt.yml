@@ -1,0 +1,80 @@
+---
+pt:
+  views:
+    pagination:
+      first: "&laquo; Primeira"
+      last: "Ultima &raquo"
+      previous: "&lsquo; Anterior"
+      next: "Proxima &rsaquo;"
+      truncate: "..."
+
+  user_sessions:
+    new:
+      title: 'Login'
+      sign_up: 'Cadastre-se'
+  links:
+    back: Voltar
+    edit: Editar
+  users:
+    new:
+      title: Cadastro
+      edit: Editar cadastro
+    show:
+      title: "Perfil: %{user_nae}"
+      edit: "Editar Perfil"
+      location: "Localização: %{location}"
+      bio: "Bio: %{bio}"
+  rooms:
+    new:
+      title: Novo Quarto
+      edit: Editar quarto
+    show:
+      edit: 'Editar'
+      back: 'Voltar'
+
+  activerecord:
+    models:
+      mobile: Móvel
+      user: Usuário
+      client: Cliente
+      budget: Orçamento
+      plate: Chapa
+      item: Item
+      budget_item_registred: Item registrado
+    attributes:
+      mobile: 
+        description: Descrição
+        name: Nome
+      budget:
+        description: Descrição
+      client:
+        name: Nome
+        phone: Telefone
+        cell_phone: Celular
+        email: E-Mail
+        description: Descrição
+        user_id: Dono
+        created_at: Criado à
+
+
+  helpers:
+    actions: Ações
+    links:
+      new: Novo
+      cancel: Cancelar
+      actions: Ações
+      edit: Editar
+      destroy: Deletar
+      back: Voltar
+      confirm: Você tem certeza disso?
+    submit:
+      user_session:
+        create: 'Entrar'
+    titles:
+      new: "Novo %{model}"
+      edit: "Editando %{model}"
+      show: Mostrando
+
+  flash:
+    notice:
+      signed_in: 'Logado com sucesso'
