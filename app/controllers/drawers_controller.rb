@@ -1,4 +1,5 @@
 class DrawersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_drawer, only: [:show, :edit, :update, :destroy]
   before_action do 
     set_client
@@ -81,6 +82,6 @@ class DrawersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def drawer_params
-      params.require(:drawer).permit(:description, :width, :height, :depth, :back_plate, :front_plate, :internal, :slide, :qtd, :mobile_id)
+      params.require(:drawer).permit(:description, :width, :height, :depth, :back_plate, :front_platew, :internal, :slide, :qtd, :mobile_id)
     end
 end

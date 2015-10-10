@@ -1,10 +1,10 @@
 class Mobile < ActiveRecord::Base
   belongs_to :budget
-  has_many :plates
-  has_many :unregistred_items
-  has_many :by_meters
-  has_many :drawers
-  has_many :budget_items
+  has_many :plates, :dependent => :destroy
+  has_many :unregistred_items, :dependent => :destroy
+  has_many :by_meters, :dependent => :destroy
+  has_many :drawers, :dependent => :destroy
+  has_many :budget_items, :dependent => :destroy
   validates_presence_of :multiplier, :name
   validates_numericality_of :multiplier
   def total_value
@@ -25,6 +25,18 @@ class Mobile < ActiveRecord::Base
       value_to_sum = value_to_sum / self.multiplier unless by_meter.multiplicable
       total_value+= value_to_sum
     end
+
+    self.drawers.each do |drawer| 
+      total_value+= drawer.total_value
+    end
+
+    self.budget_items.each do |budget_item| 
+      value_to_sum = budget_item.total_value
+      value_to_sum = value_to_sum / self.multiplier unless budget_item.multiplicable
+      total_value+= value_to_sum
+    end
+
+
 
   	total_value
   end

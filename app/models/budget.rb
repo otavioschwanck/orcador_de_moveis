@@ -1,6 +1,6 @@
 class Budget < ActiveRecord::Base
   belongs_to :client
-  has_many :mobiles
+  has_many :mobiles, :dependent => :destroy
   def total_value
   	total_value = 0
   	self.mobiles.each do |mobile| 

@@ -1,8 +1,9 @@
 class MobilesController < ApplicationController
+      before_action :authenticate_user!
   before_action :set_client
   before_action :set_budget
   before_action :set_mobile, only: [:show, :edit, :update, :destroy]
-    before_action :authenticate_user!
+
   # GET /mobiles
 
   # GET /mobiles/1

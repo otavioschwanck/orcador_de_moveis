@@ -53,6 +53,7 @@ pt:
         description: Descrição
         width: Largura
         height: Altura
+        depth: Profundidade
         front_plate: Preço da chapa da frente
         internal: Preço da chapa interna
         back_plate: Preçod a chapa do fundo
