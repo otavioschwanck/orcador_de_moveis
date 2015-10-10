@@ -3,6 +3,8 @@ class Mobile < ActiveRecord::Base
   has_many :plates
   has_many :unregistred_items
   has_many :by_meters
+  has_many :drawers
+  has_many :budget_items
   validates_presence_of :multiplier, :name
   validates_numericality_of :multiplier
   def total_value

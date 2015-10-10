@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  item_id: 
+  qtd: 1.5
+  multiplicable: false
+  mobile_id: 
+
+two:
+  item_id: 
+  qtd: 1.5
+  multiplicable: false
+  mobile_id: 

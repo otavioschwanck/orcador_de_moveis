@@ -1,5 +1,5 @@
 class PlatesController < ApplicationController
-    before_action :authenticate_user!
+  before_action :authenticate_user!
   before_action do 
     set_client
     set_budget

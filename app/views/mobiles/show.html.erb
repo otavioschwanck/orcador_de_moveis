@@ -11,6 +11,8 @@
 <dl class="dl-horizontal">
 </dl>
 
+<%= link_to "Adicionar gaveta", new_client_budget_mobile_drawer_path(@client, @budget, @mobile), class: 'btn btn-default' %>
+<%= link_to 'Adicionar item cadastrado', new_client_budget_mobile_budget_item_path(@client, @budget, @mobile), class: 'btn btn-default' %>
 <%= link_to "Adicionar chapa", new_client_budget_mobile_plate_path(@client, @budget, @mobile), class: "btn btn-default" %>
 <%= link_to "Adicionar por metro quadrado", new_client_budget_mobile_by_meter_path(@client, @budget, @mobile), class: "btn btn-default" %>
 
@@ -76,6 +78,33 @@
 <% end %>
 
 
+<% if @mobile.budget_items.count != 0 %>
+<h3>Itens registrados</h3>
+	<table class = "table table-sm">
+		<tr>
+			<td>Item</td>
+			<td>Valor do item</td>
+			<td>Quantidade</td>
+			<td>Valor total</td>
+			<td>Multiplicar pelo multiplicador do móvel</td>
+			<td colspan="2">Ações</td>
+		</tr>
+		<% @mobile.budget_items.each do |budget_item| %>
+		<tr>
+			<td><%= budget_item.item.name %></td>
+			<td><%= number_to_currency budget_item.item.value %></td>
+			<td><%= budget_item.qtd %></td>
+			<td><%= number_to_currency budget_item.total_value %></td>
+			<td><%= budget_item.multiplicable ? "Sim" : "Não" %></td>
+			<td><%= link_to "editar", edit_client_budget_mobile_budget_item_path(@client, @budget, @mobile, budget_item), class: "btn btn-default btn-sm" %></td>
+			<td><%= link_to "deletar", client_budget_mobile_budget_item_path(@client, @budget, @mobile, budget_item), method: :delete, class: "btn btn-danger btn-sm", data: {confirm: "Você tem certeza disso?"} %></td>
+		</tr>
+		<% end %>
+	</table>
+<% end %>
+
+
+
 <% if @mobile.by_meters.count != 0 %>
 <h3>Móveis por metro</h3>
 	<table class = "table table-sm">
@@ -99,6 +128,31 @@
 			<td><%= number_to_currency by_meter.total_value %></td>
 			<td><%= link_to "editar", edit_client_budget_mobile_by_meter_path(@client, @budget, @mobile, by_meter), class: "btn btn-default btn-sm" %></td>
 			<td><%= link_to "deletar", client_budget_mobile_by_meter_path(@client, @budget, @mobile, by_meter), method: :delete, class: "btn btn-danger btn-sm", data: {confirm: "Você tem certeza disso?"} %></td>
+		</tr>
+		<% end %>
+	</table>
+<% end %>
+
+
+<% if @mobile.drawers.count != 0 %>
+<h3>Gavetas</h3>
+	<table class = "table table-sm">
+		<tr>
+			<td>Descrição</td>
+			<td>Preço único</td>
+			<td>Quantidade</td>
+			<td>Preço total</td>
+			<td colspan="2">Ações</td>
+		</tr>
+		<% @mobile.drawers.each do |drawer| %>
+		<tr>
+			<td><%= "#{drawer.width}x#{drawer.height}x#{drawer.depth} (LxAxP) - Frente: #{number_to_currency drawer.front_plate} - Fundo: #{number_to_currency drawer.back_plate} - Interno: #{number_to_currency drawer.internal} - Preço das corrediças: #{number_to_currency drawer.slide}" %></td>
+			<td><%= number_to_currency drawer.total_value / drawer.qtd %></td>
+			<td><%= drawer.qtd %></td>
+			<td><%= number_to_currency drawer.total_value %></td>
+
+			<td><%= link_to "editar", edit_client_budget_mobile_drawer_path(@client, @budget, @mobile, drawer), class: "btn btn-default btn-sm" %></td>
+			<td><%= link_to "deletar", client_budget_mobile_drawer_path(@client, @budget, @mobile, drawer), method: :delete, class: "btn btn-danger btn-sm", data: {confirm: "Você tem certeza disso?"} %></td>
 		</tr>
 		<% end %>
 	</table>

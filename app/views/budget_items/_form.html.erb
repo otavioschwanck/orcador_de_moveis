@@ -1,0 +1,12 @@
+<%= simple_form_for [@client, @budget, @mobile, @budget_item], :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.association :item, collection: current_user.items.order(:name), label_method: :name, value_method: :id %>
+  <%= error_span(@budget_item[:item_id]) %>
+  <%= f.input :qtd %>
+  <%= error_span(@budget_item[:qtd]) %>
+  <%= f.input :multiplicable, as: :boolean %>
+  <%= error_span(@budget_item[:multiplicable]) %>
+
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                client_budget_mobile_path(@client, @budget, @mobile), :class => 'btn btn-default' %>
+<% end %>

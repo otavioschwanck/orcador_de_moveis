@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   
 
   
+
+  resources :items
   resources :clients do 
     resources :budgets do 
       get "budgets/copiable"
@@ -11,9 +13,13 @@ Rails.application.routes.draw do
         resources :plates, except: [:index, :show]
         resources :unregistred_items, except: [:index, :show]
         resources :by_meters, except: [:index, :show]
+        resources :drawers, except: [:index, :show]
+        resources :budget_items, except: [:index, :show]
       end
     end
   end
+
+  
   root 'home#index'
 
   devise_for :users

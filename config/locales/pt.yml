@@ -43,7 +43,21 @@ pt:
       item: Item
       budget_item_registred: Item registrado
       unregistred_item: Item não registrado
+      budget_item: Item cadastrado
+      drawer: Gaveta
     attributes:
+      budget_item:
+        qtd: Quantidade
+        multiplicable: Multiplicar este item pela quantidade de vezes do móvel?
+      drawer:
+        description: Descrição
+        width: Largura
+        height: Altura
+        front_plate: Preço da chapa da frente
+        internal: Preço da chapa interna
+        back_plate: Preçod a chapa do fundo
+        slide: Preço das corrediças
+        qtd: Quantidade de gavetas iguais a esta.
       by_meter:
         width: Largura
         height: Altura
@@ -75,7 +89,11 @@ pt:
         description: Descrição
         user_id: Dono
         created_at: Criado à
-
+      item:
+        name: Nome
+        value: Valor
+        description: Descrição
+        who_sell: Vendedores
 
   helpers:
     actions: Ações

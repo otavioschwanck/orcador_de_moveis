@@ -1,0 +1,50 @@
+<%- model_class = Drawer -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:width) %></th>
+      <th><%= model_class.human_attribute_name(:height) %></th>
+      <th><%= model_class.human_attribute_name(:front_plate) %></th>
+      <th><%= model_class.human_attribute_name(:internal) %></th>
+      <th><%= model_class.human_attribute_name(:slide) %></th>
+      <th><%= model_class.human_attribute_name(:qtd) %></th>
+      <th><%= model_class.human_attribute_name(:mobile_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @drawers.each do |drawer| %>
+      <tr>
+        <td><%= link_to drawer.id, drawer_path(drawer) %></td>
+        <td><%= drawer.description %></td>
+        <td><%= drawer.width %></td>
+        <td><%= drawer.height %></td>
+        <td><%= drawer.front_plate %></td>
+        <td><%= drawer.internal %></td>
+        <td><%= drawer.slide %></td>
+        <td><%= drawer.qtd %></td>
+        <td><%= drawer.mobile_id %></td>
+        <td><%=l drawer.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_drawer_path(drawer), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      drawer_path(drawer),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_drawer_path,
+            :class => 'btn btn-primary' %>

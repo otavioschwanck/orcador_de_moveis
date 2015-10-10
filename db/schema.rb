@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151009203820) do
+ActiveRecord::Schema.define(version: 20151010000633) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "budget_items", force: :cascade do |t|
+    t.integer  "item_id"
+    t.float    "qtd"
+    t.boolean  "multiplicable"
+    t.integer  "mobile_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "budget_items", ["item_id"], name: "index_budget_items_on_item_id", using: :btree
+  add_index "budget_items", ["mobile_id"], name: "index_budget_items_on_mobile_id", using: :btree
 
   create_table "budgets", force: :cascade do |t|
     t.string   "description"
@@ -50,6 +62,35 @@ ActiveRecord::Schema.define(version: 20151009203820) do
   end
 
   add_index "clients", ["user_id"], name: "index_clients_on_user_id", using: :btree
+
+  create_table "drawers", force: :cascade do |t|
+    t.text     "description"
+    t.float    "width"
+    t.float    "height"
+    t.float    "front_plate"
+    t.float    "internal"
+    t.float    "slide"
+    t.integer  "qtd"
+    t.integer  "mobile_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.float    "back_plate"
+    t.float    "depth"
+  end
+
+  add_index "drawers", ["mobile_id"], name: "index_drawers_on_mobile_id", using: :btree
+
+  create_table "items", force: :cascade do |t|
+    t.string   "name"
+    t.float    "value"
+    t.text     "description"
+    t.text     "who_sell"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "items", ["user_id"], name: "index_items_on_user_id", using: :btree
 
   create_table "mobiles", force: :cascade do |t|
     t.string   "name"
@@ -102,9 +143,13 @@ ActiveRecord::Schema.define(version: 20151009203820) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+  add_foreign_key "budget_items", "items"
+  add_foreign_key "budget_items", "mobiles"
   add_foreign_key "budgets", "clients"
   add_foreign_key "by_meters", "mobiles"
   add_foreign_key "clients", "users"
+  add_foreign_key "drawers", "mobiles"
+  add_foreign_key "items", "users"
   add_foreign_key "mobiles", "budgets"
   add_foreign_key "plates", "mobiles"
   add_foreign_key "unregistred_items", "mobiles"

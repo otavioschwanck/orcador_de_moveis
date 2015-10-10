@@ -1,0 +1,26 @@
+<%= simple_form_for [@client, @budget, @mobile, @drawer], :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :description %>
+  <%= error_span(@drawer[:description]) %>
+  <%= f.input :width %>
+  <%= error_span(@drawer[:width]) %>
+  <%= f.input :height %>
+
+  <%= error_span(@drawer[:height]) %>
+    <%= f.input :depth %>
+
+  <%= error_span(@drawer[:depth]) %>
+  <%= f.input :front_plate %>
+  <%= error_span(@drawer[:front_plate]) %>
+  <%= f.input :internal %>
+  <%= error_span(@drawer[:internal]) %>
+  <%= f.input :back_plate %>
+  <%= error_span(@drawer[:back_plate]) %>
+  <%= f.input :slide %>
+  <%= error_span(@drawer[:slide]) %>
+  <%= f.input :qtd %>
+  <%= error_span(@drawer[:qtd]) %>
+
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                client_budget_mobile_path(@client, @budget, @mobile), :class => 'btn btn-default' %>
+<% end %>
